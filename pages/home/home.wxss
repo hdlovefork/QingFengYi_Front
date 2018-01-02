@@ -1,0 +1,4 @@
+@import "../tpls/base.wxss";
+.swiper{
+   height: 320rpx; 
+}

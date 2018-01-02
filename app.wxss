@@ -1,0 +1,85 @@
+/**app.wxss**/
+.container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background-color: #fff;
+  font-family: "Microsoft Yahei";
+}
+.row{
+  overflow: hidden;
+}
+.img{
+  width:100%;
+  animation: 1s opacity3;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+body,p,img,span,li,ul,div,input,button {
+    margin: 0;
+    border:none;
+    padding: 0;
+    outline: none;
+}
+body {
+    font-size: 17px;
+    margin:  0 auto;
+    background: #faf5f6;
+    top:0;
+    left:0;
+}
+.no-scroll {
+    height:100%;
+    overflow: hidden;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.toTop {
+    position: fixed;
+    right: 30px;
+    bottom: 65px;
+    font-family: iconfont;
+    display: none;
+    font-size: 37px;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #CCCCCC;
+    border-radius: 50px;
+    text-align: center;
+    z-index: 11;
+    line-height: 50px;
+    color: #8c8c8c;
+}
+
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('//at.alicdn.com/t/font_1465972880_677109.eot'); /* IE9*/
+    src: url('//at.alicdn.com/t/font_1465972880_677109.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('//at.alicdn.com/t/font_1465972880_677109.woff') format('woff'), /* chrome、firefox */ url('//at.alicdn.com/t/font_1465972880_677109.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('//at.alicdn.com/t/font_1465972880_677109.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+

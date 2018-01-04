@@ -1,60 +1,75 @@
 <!--pages/share/share.wxml-->
-<swiper indicator-dots="true" duration="1000" interval="5000"  current="0" class='swiper'>
-  <block wx:for="{{pics}}">
+<swiper indicator-dots="true" duration="1000" interval="5000" current="0" class='swiper'>
+  <block wx:for="{{pics['main']}}">
     <swiper-item>
-      <image mode="widthFix" class="img" src="{{item}}"></image>
+      <image data-src='main' bindtap='showImage' mode="widthFix" class="img" src="{{item}}"></image>
     </swiper-item>
   </block>
 </swiper>
 <view class='jieshaop'>
   <view class='new_div'>
-    <view class='title'><view class='itemTypeName'>{{isTmall?"天猫":"淘宝"}}</view>{{' ' + title}}</view>
+    <view class='title'>
+      <view class='itemTypeName'>{{isTmall?"天猫":"淘宝"}}</view>{{' ' + title}}</view>
     <view class='biaoqian'></view>
     <view class='module1 row'>
       <view class='jiage'>
-        <image mode='widthFix' src='/images/daoshoujia.png'style='width: 96rpx; height: 48rpx;'></image>￥<text class='quans'>1.35</text><text class='footyuanjia'>￥4.35</text>
+        <image mode='widthFix' src='/images/daoshoujia.png' style='width: 96rpx; height: 48rpx;'></image>￥
+        <text class='quans'>{{quanInfo.quanhou}}</text>
+        <text class='footyuanjia'>￥{{quanInfo.yuanjia}}</text>
       </view>
-      <view class='xiaoliang'><text>1368人已买</text></view>   
+      <view class='xiaoliang'>
+        <text>{{quanInfo.xiaoliang}}人已买</text>
+      </view>
     </view>
     <view class='lingquan row'>
       <image mode='widthFix' src="{{baseUrl+'images/coupon_quan_bg-bbd551c50b.png'}}"></image>
-      <text class='quane'>3<text class='quanet'>元优惠券</text></text>
+      <text class='quane'>{{quanInfo.quan}}<text class='quanet'>元优惠券</text></text>
       <text class="lingquantext">立即领券</text>
     </view>
   </view>
   <view class='jieshao row'>
     <text>推荐</text>
-    <text selectable='true'>家用电器全部搞定，环保材料，面板厚实，简约设计，精选锡磷青铜，导电性能好，德国拜耳阻燃PC，耐高温，长久耐用，还送两块雕牌、买到就是赚到！！！</text>
+    <text selectable='true'>{{quanInfo.jie}}</text>
   </view>
   <view class='dianpu row'>
     <view class='dppicUrl'>
       <image src="{{shopIcon}}"></image>
-    </view>    
+    </view>
     <view class='dpjieshao row'>
-      <view class='dptitle'>       
+      <view class='dptitle'>
         {{shopName}}
       </view>
       <view class='dpxinxi'>
-        <view class='ping'>描述相符<text style='color:#FF5000'>4.8</text></view>
-        <view class='ping'>服务态度<text style='color:#FF5000'>4.8</text></view>
-        <view class='ping'>物流服务<text style='color:#FF5000'>4.8</text></view>
+        <view class='ping'>描述相符
+          <text style='color:#FF5000'>4.8</text>
+        </view>
+        <view class='ping'>服务态度
+          <text style='color:#FF5000'>4.8</text>
+        </view>
+        <view class='ping'>物流服务
+          <text style='color:#FF5000'>4.8</text>
+        </view>
       </view>
     </view>
   </view>
   <view class='pinlinmini'>
-    <view class='xiangqingtitle'>宝贝评论(5539)</view>
-    <view class='reping row'>
-      <view class='touxianghead'>
-        <image src='//wwc.alicdn.com/avatar/getAvatar.do?userIdStr=vFkSPFHuXH*evF8LPmHSXmvyXF9hvkcYXFIyOFk0PCZzPCMHMHZ-M88bXFg0v8kL&width=40&height=40&type=sns'></image>
-        <text class='nick'>世**f</text>
+    <view class='xiangqingtitle'>宝贝评论({{rateInfo.rateCounts}})</view>
+    <block wx:for="{{rateInfo.rateDetailList}}" wx:for-index="rateIndex">
+      <view class='reping row'>
+        <view class='touxianghead'>
+          <image src='//wwc.alicdn.com/avatar/getAvatar.do?userIdStr=vFkSPFHuXH*evF8LPmHSXmvyXF9hvkcYXFIyOFk0PCZzPCMHMHZ-M88bXFg0v8kL&width=40&height=40&type=sns'></image>
+          <text class='nick'>{{item.nick}}</text>
+        </view>
+        <view class='pinglunmain'>
+          {{item.feedback}}
+          <view class='pinlunguig'>{{item.subInfo}}</view>
+        </view>
+        <block wx:for="{{item.ratePicList}}">
+          <view class='pinlunimages'>
+            <image data-src='{{rateIndex}}' src='{{item}}' bindtap='showImage'></image>
+          </view>
+        </block>
       </view>
-      <view class='pinglunmain'>
-        取暖器不错，董小姐的货值得信赖，烤鸡蛋神器，烤火半小时吃鸡蛋，温度杠杠的，最高温度测到88，热片温度估计90以上，比灯光取款强太多，不刺眼，烤鸡蛋功能秒杀空调哈哈，下次再买红薯来试试！
-        <view class='pinlunguig'>2017-12-22 颜色分类:红色</view>
-      </view>
-      <view class='pinlunimages'><image src='http://gw.alicdn.com/bao/uploaded/i2/0/TB2fmJicQfb_uJkSndVXXaBkpXa_!!0-rate.jpg'></image></view>
-      <view class='pinlunimages'><image src='http://gw.alicdn.com/bao/uploaded/i2/0/TB2fmJicQfb_uJkSndVXXaBkpXa_!!0-rate.jpg'></image></view>
-      <view class='pinlunimages'><image src='http://gw.alicdn.com/bao/uploaded/i2/0/TB2fmJicQfb_uJkSndVXXaBkpXa_!!0-rate.jpg'></image></view>
-    </view>
+    </block>
   </view>
 </view>

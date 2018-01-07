@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/share/share"
+    "pages/share/share",
+    "pages/jiaocheng/jiaocheng",
+    "pages/rate/rate"
   ],
   "window": {
     "backgroundTextStyle": "light",

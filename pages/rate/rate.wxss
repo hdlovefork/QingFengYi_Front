@@ -1,0 +1,19 @@
+body{ background: #eee; font-size: 14px; color: #444; }
+body{ -webkit-animation: 1s opacity2; animation: 1s opacity2; }
+@-webkit-keyframes opacity2{ 0%{opacity:0}
+100%{opacity:1;}
+}@keyframes opacity2{ 0%{opacity:0}
+100%{opacity:1;}
+}.list{ padding: 6px 10px; background: #fff; margin: 1px 0; }
+.list .nick{ padding-left: 6px; font-size: 13px; }
+.list .avatar{ display:inline-block; vertical-align:middle; width: 25px; height: 25px; border-radius: 50%; }
+.list .content{ text-indent:2px; padding: 4px 0; font-size: 11px; line-height: 20px; color: #444; }
+.list .foorter{ font-size: 10px; color: #777; }
+.pinlunimages{ float: left; width: 70px; height: 60px; margin: 5px; }
+.pinlunimages wx-image{ width: 100%; border-radius: 2px; height: 60px; }
+.list wx-video{ width: 100%; }
+.jiazaizhong{ margin: 0 auto; padding: 10px; text-align: center; background: #eee; font-weight: bold; font-size: 16px; }
+.jiazaidh{ display: none; }
+.jiazaizhong wx-image{ margin: 0 auto; padding-bottom: 5px; width:60%; height:58px; display:block; }
+.qugoumai{ font-size: 12px; position:fixed; right: 0; bottom: 80px; color: #fff; border-top-left-radius: 6px; border-bottom-left-radius: 6px; padding: 6px 10px; background: linear-gradient(to right,#ff7438,#ff1f1f); }
+.jiazai{ display: none; }

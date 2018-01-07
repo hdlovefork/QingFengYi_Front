@@ -1,20 +1,44 @@
-import {Base} from '../../utils/base.js';
+import { Base } from '../../utils/base.js';
 
-class Share extends Base{
+class Share extends Base {
   //淘宝详情描述信息
-  getDetail(tbid,callback){
-    var params={
-      url:'https://hws.m.taobao.com/cache/wdetail/5.0/?id='+tbid,
+  getDetail(ids, callback) {
+    var params = {
+      url: 'https://hws.m.taobao.com/cache/wdetail/5.0/?id=' + ids.tbid,
+      sCallback: function (res) {
+        callback && callback(res);
+      }
+    }
+    this.request(params);
+  }
+  getTKL(data,callback){
+    let params={
+      url:'tkl',
+      type:'POST',
+      data:data,
       sCallback:function(res){
         callback && callback(res);
       }
     }
     this.request(params);
   }
-
-  getQuanInfo(tbid,callback){
+  getQuanInfo(ids, callback) {
     let params = {
-      url: 'quan/' + tbid,
+      url: 'quan',
+      type:'POST',
+      data:ids,
+      sCallback: function (res) {
+        callback && callback(res);
+      }
+    }
+    this.request(params);
+  }
+
+  getDetailPics(ids, callback) {
+    let params = {
+      url: 'pics',
+      type:'POST',
+      data:ids,
       sCallback: function (res) {
         callback && callback(res);
       }
@@ -23,4 +47,4 @@ class Share extends Base{
   }
 }
 
-export {Share};
+export { Share };

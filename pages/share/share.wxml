@@ -1,75 +1,105 @@
 <!--pages/share/share.wxml-->
-<swiper indicator-dots="true" duration="1000" interval="5000" current="0" class='swiper'>
-  <block wx:for="{{pics['main']}}">
-    <swiper-item>
-      <image data-src='main' bindtap='showImage' mode="widthFix" class="img" src="{{item}}"></image>
-    </swiper-item>
-  </block>
-</swiper>
-<view class='jieshaop'>
-  <view class='new_div'>
-    <view class='title'>
-      <view class='itemTypeName'>{{isTmall?"天猫":"淘宝"}}</view>{{' ' + title}}</view>
-    <view class='biaoqian'></view>
-    <view class='module1 row'>
-      <view class='jiage'>
-        <image mode='widthFix' src='/images/daoshoujia.png' style='width: 96rpx; height: 48rpx;'></image>￥
-        <text class='quans'>{{quanInfo.quanhou}}</text>
+<view class='container'>
+  <swiper indicator-dots="true" duration="1000" interval="5000" current="0" class='swiper'>
+    <block wx:for="{{pics['main']}}">
+      <swiper-item>
+        <image data-src='main' bindtap='onShowImage' mode="widthFix" class="img" src="{{'https:'+item}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='jieshaop'>
+    <view class='new_div'>
+      <view class='title'>
+        <view class='itemTypeName'>{{isTmall?"天猫":"淘宝"}}</view>{{' ' + title}}</view>
+      <view class='biaoqian'></view>
+      <view class='module1 row'>
+        <view class='jiage'>
+          <image mode='widthFix' src='/images/daoshoujia.png' style='width: 96rpx; height: 48rpx;'></image>￥
+          <text class='quans'>{{quanInfo.quanhou}}</text>
+          <text class='footyuanjia'>￥{{quanInfo.yuanjia}}</text>
+        </view>
+        <view class='xiaoliang'>
+          <text>{{quanInfo.xiaoliang}}人已买</text>
+        </view>
+      </view>
+      <view class='lingquan row'>
+        <image mode='widthFix' src="{{baseUrl+'images/coupon_quan_bg-bbd551c50b.png'}}"></image>
+        <text class='quane'>{{quanInfo.quan}}<text class='quanet'>元优惠券</text></text>
+        <text class="lingquantext" bindtap='onLingQuan'>立即领券</text>
+      </view>
+    </view>
+    <view class='jieshao row'>
+      <text>推荐</text>
+      <text selectable='true'>{{quanInfo.jie}}</text>
+    </view>
+    <view class='dianpu row'>
+      <view class='dppicUrl'>
+        <image src="{{'https:'+shopIcon}}"></image>
+      </view>
+      <view class='dpjieshao row'>
+        <view class='dptitle'>
+          {{shopName}}
+        </view>
+        <view class='dpxinxi'>
+          <view class='ping'>描述相符
+            <text style='color:#FF5000'>4.8</text>
+          </view>
+          <view class='ping'>服务态度
+            <text style='color:#FF5000'>4.8</text>
+          </view>
+          <view class='ping'>物流服务
+            <text style='color:#FF5000'>4.8</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='pinlinmini'>
+      <view class='xiangqingtitle'>宝贝评论({{rateInfo.rateCounts}})</view>
+      <block wx:for="{{rateInfo.rateDetailList}}" wx:for-index="rateIndex">
+        <view class='reping row'>
+          <view class='touxianghead'>
+            <image src='//wwc.alicdn.com/avatar/getAvatar.do?userIdStr=vFkSPFHuXH*evF8LPmHSXmvyXF9hvkcYXFIyOFk0PCZzPCMHMHZ-M88bXFg0v8kL&width=40&height=40&type=sns'></image>
+            <text class='nick'>{{item.nick}}</text>
+          </view>
+          <view class='pinglunmain'>
+            {{item.feedback}}
+            <view class='pinlunguig'>{{item.subInfo}}</view>
+          </view>
+          <block wx:for="{{item.ratePicList}}">
+            <view class='pinlunimages'>
+              <image data-src='{{rateIndex}}' src="{{'https:'+item}}" bindtap='onShowImage'></image>
+            </view>
+          </block>
+          <view style='clear:both'></view>
+          <view class='chakanquanbupl' bindtap='onShowRates'>
+            <text>查看全部评论</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class='guigedivs'>
+      <view class='xiangqingtitle'>产品参数</view>
+      <block wx:for="{{props}}">
+        <view class="guigediv">
+          <text>{{item.name}}</text>：{{item.value}}
+        </view>
+      </block>
+
+    </view>
+    <view class='xiangqingtitle'>图文详情</view>
+    <view class='tuwen'>
+      <block wx:for="{{pics['detailPics']}}">
+        <image mode='widthFix' src="{{item}}"></image>
+      </block>
+    </view>
+  </view>
+  <view class='foottkl' wx:if="{{showFootTKL}}">
+    <view class='foottkll'>
+      <view class='foottklls'>券后
+        <text class='footquanhou'>￥{{quanInfo.quanhou}}</text>
         <text class='footyuanjia'>￥{{quanInfo.yuanjia}}</text>
       </view>
-      <view class='xiaoliang'>
-        <text>{{quanInfo.xiaoliang}}人已买</text>
-      </view>
     </view>
-    <view class='lingquan row'>
-      <image mode='widthFix' src="{{baseUrl+'images/coupon_quan_bg-bbd551c50b.png'}}"></image>
-      <text class='quane'>{{quanInfo.quan}}<text class='quanet'>元优惠券</text></text>
-      <text class="lingquantext">立即领券</text>
-    </view>
-  </view>
-  <view class='jieshao row'>
-    <text>推荐</text>
-    <text selectable='true'>{{quanInfo.jie}}</text>
-  </view>
-  <view class='dianpu row'>
-    <view class='dppicUrl'>
-      <image src="{{shopIcon}}"></image>
-    </view>
-    <view class='dpjieshao row'>
-      <view class='dptitle'>
-        {{shopName}}
-      </view>
-      <view class='dpxinxi'>
-        <view class='ping'>描述相符
-          <text style='color:#FF5000'>4.8</text>
-        </view>
-        <view class='ping'>服务态度
-          <text style='color:#FF5000'>4.8</text>
-        </view>
-        <view class='ping'>物流服务
-          <text style='color:#FF5000'>4.8</text>
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class='pinlinmini'>
-    <view class='xiangqingtitle'>宝贝评论({{rateInfo.rateCounts}})</view>
-    <block wx:for="{{rateInfo.rateDetailList}}" wx:for-index="rateIndex">
-      <view class='reping row'>
-        <view class='touxianghead'>
-          <image src='//wwc.alicdn.com/avatar/getAvatar.do?userIdStr=vFkSPFHuXH*evF8LPmHSXmvyXF9hvkcYXFIyOFk0PCZzPCMHMHZ-M88bXFg0v8kL&width=40&height=40&type=sns'></image>
-          <text class='nick'>{{item.nick}}</text>
-        </view>
-        <view class='pinglunmain'>
-          {{item.feedback}}
-          <view class='pinlunguig'>{{item.subInfo}}</view>
-        </view>
-        <block wx:for="{{item.ratePicList}}">
-          <view class='pinlunimages'>
-            <image data-src='{{rateIndex}}' src='{{item}}' bindtap='showImage'></image>
-          </view>
-        </block>
-      </view>
-    </block>
+    <view class='foottklr' bindtap='onLingQuan' >立即领券</view>
   </view>
 </view>

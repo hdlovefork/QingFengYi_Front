@@ -1,0 +1,17 @@
+<!--pages/jiaocheng/jiaocheng.wxml-->
+<view class='container'>
+  <view id='top' wx:if="{{mini == 0}}">
+    <image class='banner' mode='widthFix' src='/images/chaojisou.png' style='height: 202.5px;'></image>
+    <view class='sous'>
+      <view class='sousuov'>
+        <input class='soinput' disabled='true' confirm-type='search' name='sousuo' placeholder='输入关键词或粘贴淘宝/天猫商品标题' placeholder-class='psection' type='text'></input>
+        <button class='sobtn' form-type='submit'>
+          <icon class='searchico' size='14' type='search'></icon>
+        </button>
+      </view>
+    </view>
+  </view>
+  <view class='nosotui' wx:if="{{mini == 0}}"></view>
+  <image mode='widthFill' wx:if="{{mini == 0}}" src='/images/chaquan.jpg' style='width: 100%; height: 39px;'></image>
+  <image mode='widthFix' src='http://pro.zaiyiqiba.com/images/chaquan.jpg' style='width: 100%; height: 1615.95px;'></image>
+</view>

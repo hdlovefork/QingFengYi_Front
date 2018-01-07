@@ -1,0 +1,26 @@
+<view class='container'>
+  <scroll-view scroll-top='0' lower-threshold='500' bindscrolltolower='onBindscrolltolower' scroll-with-animation='true' scroll-y="true" style='position:absolute; top:0; left:0; right:0; bottom:0;'>
+    <block wx:for="{{rates}}" wx:for-index="rateIndex" wx:for-item="rate">
+      <view class='list'>
+        <image class='avatar' src='https://img.alicdn.com/tps/i3/TB1yeWeIFXXXXX5XFXXuAZJYXXX-210-210.png'></image>
+        <text class='nick'>{{rate.displayUserNick}}</text>
+        <view class='content'>{{rate.rateContent}}</view>
+        <view style='clear:both'></view>
+        <block wx:for="{{rate.pics}}">
+          <view class='pinlunimages'>
+            <image data-id="{{rateIndex}}" src="{{item}}" bindtap='onShowImage'></image>
+          </view>
+        </block>
+        <view style="clear: both"></view>
+        <view class='foorter'>
+          <text>{{rate.rateDate}}</text>
+          <text>{{rate.auctionSku}}</text>
+        </view>
+      </view>
+    </block>
+    <view class='qugoumai' bindtap='onBack'>返回,去购买</view>
+    <view class='jiazaizhong' wx:if="{{loading}}">
+      <image src="{{baseUrl+'images/loading.gif'}}"></image> 拼命加载中...
+    </view>
+  </scroll-view>
+</view>

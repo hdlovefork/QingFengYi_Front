@@ -1,0 +1,5 @@
+<template name="loading">
+  <view class='jiazaizhong' style='width:100%'>
+    <image src="{{baseUrl + 'images/loading.gif'}}"></image> 拼命加载中...
+  </view>
+</template>

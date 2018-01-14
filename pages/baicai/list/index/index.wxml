@@ -1,0 +1,6 @@
+<!--pages/baicai/list/index/index.wxml-->
+<view class='container'>
+  <scroll-view scroll-top="0" scroll-with-animation="true" scroll-y="true" style='position:absolute; top:0; left:0; right:0; bottom:0;'>
+    <listnav bindSwitch="onCateSwitch"/>
+  </scroll-view>
+</view>

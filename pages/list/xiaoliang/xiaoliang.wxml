@@ -1,0 +1,34 @@
+<view class='container'>
+  <image mode='widthFix' style='width: 100%; height: 300rpx;' src='https://img.alicdn.com/imgextra/i2/2053469401/TB2nVJKgPlxYKJjSZFuXXaYlVXa_!!2053469401.jpg'></image>
+  <block wx:for="{{goods}}">
+    <view class='ddqiang'>
+      <navigator hover-class='none' url='/pages/share/share?i={{item.tbid}}&ti={{item.dtkid}}'>
+        <view class='fengmiantu'>
+          <image src='{{item.imgurl}}' style='width:100%;height:244rpx'></image>
+        </view>
+        <view class='rmain'>
+          <view class='topmain'>
+            <view class='title'>{{item.otitle}}</view>
+            <view class='words'>销量TOP100，第{{index+1}}名</view>
+          </view>
+          <view class='quanxl'>
+            <view class='goods_coupon'>
+              <text class='c_l clb'></text>
+              <text class='c_r clb'></text>
+              <text>券 ￥</text>
+              <text class='qunjine'>{{item.coupon_price}}</text>
+            </view>
+            <text class='yiqiang'>已抢<text class='xltirl'>{{item.xiaoliang}}</text>件</text>
+          </view>
+          <view class='qhfooter'>￥
+            <text class='quanhjia'>{{item.pprice}}</text>
+            <text class='quanhout'>券后</text>
+            <text class='glc-btn'>购买</text>
+          </view>
+        </view>
+        <view class='fd'></view>
+      </navigator>
+    </view>
+  </block>  
+  <loading visible="{{isLoading}}"/>
+</view>

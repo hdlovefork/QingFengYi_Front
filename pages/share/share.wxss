@@ -79,10 +79,10 @@ wx-swiper{ width: 100%; height: 20rem; }
 .toolbutton wx-text{ display:inline-table; }
 .toolbutton wx-image{ display:inline-table; }
 .modal { position: fixed; height: 100%; width: 100%; display:-webkit-flex; display:flex; -webkit-flex-direction:column; flex-direction:column; -webkit-align-items:center; align-items:center; -webkit-justify-content: center; justify-content: center; background:rgba(0, 0, 0, 0.80); }
-.guigediv{ padding: 0 10px; border-bottom: 1px solid #eee; line-height: 26px; font-size: 12px; }
+.guigediv{padding: 0 10px; border-bottom: 1px solid #eee; line-height: 26px; font-size: 12px; }
 .guigediv wx-text{ color: #444; }
 .pinlinmini{ border-bottom:4px solid #eee; }
-.guigedivs{ border-bottom:4px solid #eee; }
+.guigedivs{border-bottom:4px solid #eee;  }
 .reping{ padding: 10px; line-height: 26px; }
 .touxianghead{ display: block; }
 .touxianghead wx-image{ width: 20px; height: 20px; border-radius: 50%; }

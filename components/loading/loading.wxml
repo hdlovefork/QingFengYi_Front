@@ -1,0 +1,4 @@
+<!--components/loading/loading.wxml-->
+<view class='jiazaizhong' style='width:100%' wx:if="{{visible}}">
+  <image src="{{baseUrl + 'images/loading.gif'}}"></image> {{content}}
+</view>

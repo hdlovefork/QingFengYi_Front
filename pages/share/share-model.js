@@ -24,8 +24,7 @@ class Share extends Base {
   }
   getQuanInfo(ids, callback) {
     let params = {
-      url: 'quan',
-      type:'POST',
+      url: 'quan',     
       data:ids,
       sCallback: function (res) {
         callback && callback(res);
@@ -37,7 +36,6 @@ class Share extends Base {
   getDetailPics(ids, callback) {
     let params = {
       url: 'pics',
-      type:'POST',
       data:ids,
       sCallback: function (res) {
         callback && callback(res);

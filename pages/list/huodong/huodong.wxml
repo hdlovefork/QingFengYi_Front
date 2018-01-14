@@ -1,0 +1,48 @@
+<!--pages/list/huodong/huodong.wxml-->
+<view class='container'>
+  <scroll-view scroll-top="0" scroll-with-animation="true" scroll-y="true" lower-threshold="300" bindscrolltolower="onLoadMore" style="position:absolute; top:0; left:0; right:0; bottom:0;">
+    <view class='paixu'>
+      <view class='paixudiv'>
+        <view>
+          <text class="{{categoryIndex==0?'ha':'noha'}}" data-idx="0" bindtap='onChangeTab'>综合</text>
+        </view>
+        <view>
+          <text class="{{categoryIndex==1?'ha':'noha'}}" data-idx="1" bindtap='onChangeTab'>最新</text>
+        </view>
+        <view>
+          <text class="{{categoryIndex==2?'ha':'noha'}}" data-idx="2" bindtap='onChangeTab'>销量</text>
+        </view>
+        <view>
+          <text class="{{categoryIndex==3?'ha':'noha'}}" data-idx="3" bindtap='onChangeTab'>价格</text>
+        </view>
+      </view>
+    </view>
+    <view class='main'></view>
+    <block wx:for="{{goods}}">
+      <view class='listshop'>
+        <navigator hover-class="none" url="/pages/share/share?x=dtk&ti={{item.dtkid}}&i={{item.tbid}}&tg=">
+          <image src='{{item.imgurl}}'></image>
+          <view class='textlist'>
+            <view class='title'>
+              <text>包邮</text>{{item.otitle}}
+            </view>
+          </view>
+          <view class='yuanjiaxiaoliang'>
+            <text>原价：￥{{item.pprice+item.coupon_price}}</text>
+            <text>销量：{{item.xiaoliang}}</text>
+          </view>
+          <view class='quanfooter'>
+            <text class='goods_coupon'>
+              <text class='c_l clb'></text>
+            <text class='c_r clb'></text>
+            <text class='qunjine'>{{item.coupon_price}}</text>元券
+            </text>
+            <text class='quanhoujia'>券后价：￥<text class='quanjias'>{{item.pprice}}</text></text>
+            <view style="clear: both"></view>
+          </view>
+        </navigator>
+      </view>
+    </block>
+    <loading visible="{{isLoading}}" />
+  </scroll-view>
+</view>

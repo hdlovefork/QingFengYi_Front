@@ -3,8 +3,8 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
-		"postcss": false,
-		"minified": false,
+		"postcss": true,
+		"minified": true,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
@@ -20,14 +20,18 @@
 			"current": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"game": {
 			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 7,
 			"list": [
 				{
 					"id": 0,
 					"name": "share",
 					"pathName": "pages/share/share",
-					"query": "x=dtk&ti=4937959&u=1&i=536238401521"
+					"query": "x=dtk&ti=5158346&u=1&i=535615570326"
 				},
 				{
 					"id": 1,
@@ -40,6 +44,36 @@
 					"name": "rate",
 					"pathName": "pages/rate/rate",
 					"query": "tbid=557041533085"
+				},
+				{
+					"id": -1,
+					"name": "list_xiaoliang",
+					"pathName": "pages/list/xiaoliang/xiaoliang",
+					"query": "get=ssxiaobang&title=【实时销量榜TOP100】每二十分钟更新"
+				},
+				{
+					"id": -1,
+					"name": "list_huodong",
+					"pathName": "pages/list/huodong/huodong",
+					"query": "get=calculate&title=【聚划算】无所不能聚"
+				},
+				{
+					"id": -1,
+					"name": "haitao",
+					"pathName": "pages/list/haitao/haitao",
+					"query": "title=海淘精选&tg=\""
+				},
+				{
+					"id": 6,
+					"name": "category",
+					"pathName": "pages/category/category",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "baicai-list-index",
+					"pathName": "pages/baicai/list/index/index",
+					"query": ""
 				}
 			]
 		}

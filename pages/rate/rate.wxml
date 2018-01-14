@@ -8,7 +8,7 @@
         <view style='clear:both'></view>
         <block wx:for="{{rate.pics}}">
           <view class='pinlunimages'>
-            <image data-id="{{rateIndex}}" src="{{item}}" bindtap='onShowImage'></image>
+            <image data-id="{{rateIndex}}" src="{{item}}" data-idx="{{index}}"bindtap='onShowImage'></image>
           </view>
         </block>
         <view style="clear: both"></view>
@@ -19,8 +19,6 @@
       </view>
     </block>
     <view class='qugoumai' bindtap='onBack'>返回,去购买</view>
-    <view class='jiazaizhong' wx:if="{{loading}}">
-      <image src="{{baseUrl+'images/loading.gif'}}"></image> 拼命加载中...
-    </view>
+    <loading visible="{{loading}}"/>
   </scroll-view>
 </view>

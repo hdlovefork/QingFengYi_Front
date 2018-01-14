@@ -1,0 +1,12 @@
+<!--components/catenav/catenav.wxml-->
+
+<view class='section section_gap'>
+  <scroll-view scroll-x="true" class="scroll-view_H" style="width: 100%">
+    <block wx:for="{{category}}">
+      <view data-idx="{{index}}" bindtap='onTap'>
+        <image mode='widthFix' src='{{item.url}}'></image>
+        <text class="{{curCid==item.cid?'ha':''}}">{{item.name}}</text>
+      </view>
+    </block>
+  </scroll-view>
+</view>

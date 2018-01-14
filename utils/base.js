@@ -39,18 +39,21 @@ class Base {
         }
         else {
           //AOP
-          if (code == '401') {
-            // token.getTokenFromServer
-            // base.request
-            if (!noRefetch) {
-              that._refetch(params);
+          if(!noRefetch){
+            switch(code){
+              case '401':
+              //重新获取令牌
+                that._refetch(params);
+              break;
+              case '404':
+              //重新请求数据
+                that.request(params, true);               
+              break;
             }
-          }
+          }          
           if (noRefetch) {
             params.eCallback && params.eCallback(res.data);
-          } else {
-            that.request(params, true);
-          }
+          }          
         }
       },
       fail: function (err) {

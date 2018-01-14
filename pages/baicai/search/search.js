@@ -1,4 +1,4 @@
-// pages/jiaocheng.js
+// pages/baicai/search/search.js
 Page({
 
   /**

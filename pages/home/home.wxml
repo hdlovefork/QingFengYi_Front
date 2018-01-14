@@ -1,11 +1,133 @@
 <!--pages/home.wxml-->
+<!-- <import src="../tpls/loading/loading-tpl.wxml" /> -->
+
 <view class='container'>
-  <swiper autoplay="true" duration="1000" interval="5000" current="0" class="swiper">
-    <block wx:for="{{banners}}">
-      <swiper-item data-path="{{item.ym}}" bindtap="onShareTap">
-        <image mode="widthFix" class="img" src="{{item.url}}">
-        </image>
-      </swiper-item>
+  <scroll-view scroll-top='0' scroll-with-animation='true' lower-threshold="300" bindscrolltolower="onLoadMore" scroll-y='true'  style='position:absolute; top:0; left:0; right:0; bottom:0;'>
+    <view class="onsousuohome"></view>
+    <view class='sousuokuang'>
+      <view class='sdiv'>
+        <icon color="#ffffff" size="16" type="search"></icon>
+        <text>输入关键词或粘贴淘宝/天猫商品标题</text>
+      </view>
+    </view>
+    <swiper autoplay="true" duration="1000" interval="5000" current="0">
+      <block wx:for="{{banners}}">
+        <swiper-item data-path="{{item.ym}}" bindtap="onShareTap" style='position: absolute; width: 100%; height: 100%; transform: translate(300%, 0px) translateZ(0px);'>
+          <navigator url='{{item.url}}'>
+            <image class="slide-image" src="{{item.url}}">
+            </image>
+          </navigator>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='navcaid'>
+      <swiper class='navswiper'>
+        <swiper-item>
+          <block wx:for="{{homeicons}}">
+            <view class='listss'>
+              <navigator hover-class="none" url='{{item.ym}}'>
+                <image src='{{item.src}}'></image>
+                <text>{{item.txt}}</text>
+              </navigator>
+            </view>
+          </block>
+        </swiper-item>
+      </swiper>
+      <view>
+        <navigator hover-class="none" open-type="switchTab" url="/pages/souquan/soquan">
+          <image mode="widthFix" src="{{baseUrl +'images/cjss.jpg'}}" style="width: 100%; height: 71.0914px;"></image>
+        </navigator>
+      </view>
+    </view>
+    <view class='fenges'></view>
+    <view class='topic'>
+      <view class='topicz'>
+        <navigator hover-class="none" url='{{topics[0].pages}}'>
+          <image mode='widthFix' src='{{topics[0].src}}' style='width: 100%; height: 400rpx;'></image>
+        </navigator>
+      </view>
+      <view class='topicy'>
+        <view class='topicyz'>
+          <navigator hover-class="none" url='{{topics[1].pages}}'>
+            <image mode='widthFix' src='{{topics[1].src}}' style='width: 100%; height: 194rpx;'></image>
+          </navigator>
+        </view>
+        <view class='topicyy'>
+          <navigator hover-class="none" url='{{topics[2].pages}}'>
+            <image mode='widthFix' src='{{topics[2].src}}' style='height: 214rpx'></image>
+          </navigator>
+          <navigator hover-class="none" url='{{topics[3].pages}}'>
+            <image mode='widthFix' src='{{topics[3].src}}' style='height: 212rpx'></image>
+          </navigator>
+        </view>
+      </view>
+    </view>
+    <view class='section section_gaps'>
+      <navigator hover-class='none' style='display: inline' url='/pages/list/qiang/qiang'>
+        <view style='position:relative'>
+          <text class='changci'>{{newQiang.jxstiem}}场</text>
+        </view>
+        <image mode='widthFix' style='width: 100%; height: 29.6667px;' src='/images/asd.png'></image>
+      </navigator>
+      <scroll-view scroll-x="true" class="scroll-view_Hs" style='width:100%'>
+        <block wx:for="{{newQiang.goods}}">
+          <view class='ddqiangs'>
+            <!-- <navigator url='/pages/list/qiang/mai?dtkid=5116240&tg='> -->
+            <navigator url='/pages/share/share?ti={{item.dtkid}}'>
+              <image mode='widthFix' style='height: 200rpx;' src='{{item.imgurl}}'></image>
+            </navigator>
+            <view style='clear:both'></view>
+            <text class='titleddq'>{{item.otitle}}</text>
+            <view class='ddqq'>
+              <text class='ddqquan'>￥{{item.jiage}}</text>
+              <text class='ddqquanhou'>券后</text>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+    <view style='clear:both'></view>
+    <view class='fengg'></view>
+    <view style='clear:both'></view>
+    <image class='homezb' mode='widthFix' src='/images/shishi.jpg' style='height:68rpx;'></image>
+    <block wx:for="{{goods}}">
+      <view class='ddqiang'>
+        <navigator hover-class='none' url='/pages/share/share?x=dtk&ti={{item.dtkid}}&i={{item.tbid}}&tg='>
+          <view class='video_icon' wx:if="{{item.listmp4}}">
+            <text></text>
+          </view>
+          <view class='fengmiantu'>
+            <image mode='widthFix' src='{{item.imgurl}}' style='width: 100%; height: 244rpx;'></image>
+          </view>
+          <view class='rmain'>
+            <view class='topmain'>
+              <view class='title'>{{item.otitle}}</view>
+              <view class='words'></view>
+            </view>
+            <view class='quanxl'>
+              <view class='goods_coupon'>
+                <text class='c_l clb'></text>
+                <text class='c_r clb'></text>
+                <text>券 ￥</text>
+                <text class='qunjine'>{{item.coupon_price}}</text>
+              </view>
+              <view class='yiqiang'>
+                已抢
+                <text>{{item.xiaoliang}}</text>件
+              </view>
+            </view>
+            <view class='qhfooter'>
+              ￥
+              <text class='quanhjia'>{{item.pprice}}</text>
+              <text class='quanhout'>券后</text>
+              <text class='glc-btn'>立即领券</text>
+            </view>
+          </view>
+          <view class='fd'></view>
+        </navigator>
+      </view>
     </block>
-  </swiper>
+    <!-- <template is="loading" data="{{baseUrl}}"/> -->
+    <loading visible="{{isLoading}}"/>
+  </scroll-view>
 </view>

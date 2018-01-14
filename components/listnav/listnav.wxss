@@ -1,0 +1,9 @@
+/* components/catenav/catenav.wxss */
+.section_gap{ background: #fff; }
+.section{ padding-top: 10rpx; }
+.scroll-view_H .ha{ color: #ff5777; }
+.scroll-view_H{ background: #fff; height: 130rpx; white-space: nowrap; }
+.scroll-view_H image{ width: 80rpx; }
+.scroll-view_H text{ margin: 0 auto; text-align: center; font-size: 24rpx; display:table; }
+.scroll-view_H view{ margin: 0 auto; text-align: center; padding: 0 26rpx; display: inline-block; }
+image{height: 80rpx}

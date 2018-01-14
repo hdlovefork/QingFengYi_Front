@@ -18,7 +18,7 @@ Page({
     shopName: '',
     rateInfo: null,//淘宝数据
     baseUrl: Config.baseUrl,
-    quanInfo: {},//优惠券面额信息
+    quanInfo: null,//优惠券面额信息
     props: {}, //商品属性
     loadImage: true,//没有加载商品详情描述图？
     showFootTKL: false,//显示底部领券？
@@ -38,6 +38,11 @@ Page({
   },
 
   _init(ids) {
+    share.getQuanInfo(ids, (res) => {
+      this.setData({
+        quanInfo: res
+      })
+    })
     //淘宝详情描述信息
     share.getDetail(ids, (res) => {
       let pics = {}
@@ -57,14 +62,7 @@ Page({
         shopIcon: res.data.seller.picUrl,
         shopName: res.data.seller.shopTitle,
       })
-
-    })
-
-    share.getQuanInfo(ids, (res) => {
-      this.setData({
-        quanInfo: res
-      })
-    })
+    })   
   },
   onShowRates(event){
     wx.navigateTo({
@@ -73,13 +71,26 @@ Page({
   },
   //点击立即领券
   onLingQuan(event) {
+    if(!this.data.quanInfo || !this.data.quanInfo.taoid){
+      wx.showModal({
+        title: '温馨提示',
+        content: '该商品暂无优惠券，换个商品试试吧！',
+      })
+      return;
+    }
+    wx.showLoading({
+      title: '正在获取优惠券...',
+    })
     //设置服务器需要的参数
     let data = {
       tbid: this.data.quanInfo.taoid,
-      activity:this.data.quanInfo.activity
+      activity:this.data.quanInfo.activity,
+      logo:this.data.pics['main'][0],
+      title:this.data.title
     };
     //调用API获取淘口令
     share.getTKL(data, (res) => {
+      wx.hideLoading();
       if(!res || !res.tkl){
         //服务器没有返回数据
         wx.showModal({
@@ -135,8 +146,7 @@ Page({
     }
   },
   //显示底部领券
-  onShowFootTKL: function (event) {
-    this.onLoadImage(event);
+  onShowFootTKL: function (event) {   
     this.setData({
       showFootTKL: true
     })
@@ -160,6 +170,9 @@ Page({
   onLoadImage: function () {
     if (this.data.loadImage === false) return;
     this.data.loadImage = false;
+    wx.showLoading({
+      title: '详情加载中',
+    })
     let ids = {
       tbid: this.data.tbid,
       dtkid: this.data.dtkid
@@ -169,6 +182,8 @@ Page({
       this.setData({
         pics: this.data.pics,
         loadImage: false
+      },function(){
+        wx.hideLoading();
       })
     })
   },

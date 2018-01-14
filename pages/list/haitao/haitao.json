@@ -1,0 +1,7 @@
+{
+  "navigationBarBackgroundColor": "#A4162E",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "loading": "/components/loading/loading"
+  }
+}

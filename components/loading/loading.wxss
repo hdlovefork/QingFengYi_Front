@@ -1,0 +1,2 @@
+.jiazaizhong{ margin: 0 auto; padding: 20rpx; text-align: center;font-weight: bold; font-size: 32rpx; }
+.jiazaizhong image{ margin: 0 auto; padding-bottom: 10rpx; width:60%; height:116rpx; display:block; }

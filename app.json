@@ -3,12 +3,20 @@
     "pages/home/home",
     "pages/share/share",
     "pages/jiaocheng/jiaocheng",
-    "pages/rate/rate"
+    "pages/rate/rate",
+    "pages/list/xiaoliang/xiaoliang",
+    "pages/list/huodong/huodong",
+    "pages/topic/topic",
+    "pages/list/haitao/haitao",
+    "pages/category/category",
+    "pages/baicai/list/index/index",
+    "pages/api/qingtaoke/list",
+    "pages/baicai/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "清风易小程序",
     "navigationBarTextStyle": "black"
   }
 }

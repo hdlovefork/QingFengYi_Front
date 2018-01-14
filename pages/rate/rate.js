@@ -15,7 +15,7 @@ Page({
     pics: [],
     rates: [],
     loading: false,
-    baseUrl: Config.baseUrl
+    baseUrl: Config.baseUrl,
   },
 
   /**
@@ -23,7 +23,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      tbid: options.tbid
+      tbid: options.tbid,
+      isLoading:true,
     })
     this._init();
   },
@@ -69,10 +70,12 @@ Page({
 
   onShowImage(event){
     let id = rate.getDataSet(event,'id');
+    let index=rate.getDataSet(event,'idx');
     let picsTemp = this.data.pics[id];
     rate.addProtocol(picsTemp);
     wx.previewImage({
-      urls: picsTemp
+      urls: picsTemp,
+      current:picsTemp[index],
     });
   },
 

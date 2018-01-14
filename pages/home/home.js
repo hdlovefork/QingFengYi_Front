@@ -1,6 +1,13 @@
 // pages/home.js
 import {Home} from 'home-model.js';
+import {Config} from '../../utils/config.js';
+import {HuoDong} from '../../utils/huodong.js';
+
+import { Token } from '../../utils/token.js';
+
+var huodong = new HuoDong();
 var home = new Home();
+var token=new Token();
 
 Page({
 
@@ -8,7 +15,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    banners:{}
+    banners:{},
+    homeicons:{},
+    topics:{},
+    newQiang:{},
+    goods:[],
+    baseUrl:Config.baseUrl,
+    curPage:0,
+    isLoading:false
   },
   loadingChange:function(){
    
@@ -16,20 +30,66 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中',
-    })
-    this._getBanners();
+  onLoad: function (options) {   
+    token.verify((token)=>{
+      this._getBanners();
+      this._getHomeicons();
+      this._getTopics();
+      this._getHuodong();
+      this._getGoods();
+    });
+  },
+//咚咚抢
+  _getHuodong(){
+    huodong.get('newqiang',(res)=>{
+      this.setData({
+        newQiang:res
+      })
+    })    
   },
 
   _getBanners:function(){
     home.getBanners((res)=>{
       this.setData({
-          'banners':res.banners
+          'banners':res
       });
-      wx.hideLoading();
     });
+  },
+
+  _getHomeicons:function(){
+    home.getHomeicons((res) => {
+      this.setData({
+        'homeicons': res
+      });
+    });
+  },
+
+  _getTopics:function(){
+    home.getTopics((res) => {
+      this.setData({
+        'topics': res
+      });
+    });
+  },
+
+  _getGoods:function(){
+    
+  },
+
+  onLoadMore:function(event){
+    if(this.data.isLoading) return;
+    //防止重入，多次调用事件只执行一次
+    this.data.isLoading=true;
+    //显示加载中图片
+    this.setData({isLoading:true});
+    this.data.curPage++;
+    huodong.get('home/page/'+this.data.curPage, (res) => {
+      this.setData({
+        goods: this.data.goods.concat(res.goods),
+        curPage:this.data.curPage,
+        isLoading:false
+      })
+    })
   },
 
   onShareTap:function(event){

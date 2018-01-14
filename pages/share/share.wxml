@@ -1,9 +1,11 @@
 <!--pages/share/share.wxml-->
 <view class='container'>
-  <swiper indicator-dots="true" duration="1000" interval="5000" current="0" class='swiper'>
+  <video wx-if="{{quanInfo.mp4}}" class="mp4" src='{{quanInfo.mp4}}'></video>
+  <swiper wx-if="{{!quanInfo.mp4}}" indicator-dots="true" duration="1000" interval="5000" current="0" class='swiper'>
+
     <block wx:for="{{pics['main']}}">
       <swiper-item>
-        <image data-src='main' bindtap='onShowImage' mode="widthFix" class="img" src="{{'https:'+item}}"></image>
+        <image data-src='main' bindtap='onShowImage' mode="widthFix" class="img" src="{{item?'https:'+item:''}}"></image>
       </swiper-item>
     </block>
   </swiper>
@@ -12,21 +14,24 @@
       <view class='title'>
         <view class='itemTypeName'>{{isTmall?"天猫":"淘宝"}}</view>{{' ' + title}}</view>
       <view class='biaoqian'></view>
-      <view class='module1 row'>
-        <view class='jiage'>
-          <image mode='widthFix' src='/images/daoshoujia.png' style='width: 96rpx; height: 48rpx;'></image>￥
-          <text class='quans'>{{quanInfo.quanhou}}</text>
-          <text class='footyuanjia'>￥{{quanInfo.yuanjia}}</text>
-        </view>
-        <view class='xiaoliang'>
-          <text>{{quanInfo.xiaoliang}}人已买</text>
-        </view>
-      </view>
-      <view class='lingquan row'>
-        <image mode='widthFix' src="{{baseUrl+'images/coupon_quan_bg-bbd551c50b.png'}}"></image>
-        <text class='quane'>{{quanInfo.quan}}<text class='quanet'>元优惠券</text></text>
-        <text class="lingquantext" bindtap='onLingQuan'>立即领券</text>
-      </view>
+      <loading wx:if="{{!quanInfo}}" content="正在努力获取优惠券"/>
+        <block wx:else>
+          <view class='module1 row'>
+            <view class='jiage'>
+              <image mode='widthFix' src='/images/daoshoujia.png' style='width: 96rpx; height: 48rpx;'></image>￥
+              <text class='quans'>{{quanInfo.quanhou}}</text>
+              <text class='footyuanjia'>￥{{quanInfo.yuanjia}}</text>
+            </view>
+            <view class='xiaoliang'>
+              <text>{{quanInfo.xiaoliang}}人已买</text>
+            </view>
+          </view>
+          <view class='lingquan row' bindtap='onLingQuan'>
+            <image mode='widthFix' src="{{baseUrl+'images/coupon_quan_bg-bbd551c50b.png'}}"></image>
+            <text class='quane'>{{quanInfo.quan}}<text class='quanet'>元优惠券</text></text>
+            <text class="lingquantext">立即领券</text>
+          </view>
+        </block>
     </view>
     <view class='jieshao row'>
       <text>推荐</text>
@@ -34,7 +39,7 @@
     </view>
     <view class='dianpu row'>
       <view class='dppicUrl'>
-        <image src="{{'https:'+shopIcon}}"></image>
+        <image src="{{shopIcon?'https:'+shopIcon:''}}"></image>
       </view>
       <view class='dpjieshao row'>
         <view class='dptitle'>
@@ -58,7 +63,7 @@
       <block wx:for="{{rateInfo.rateDetailList}}" wx:for-index="rateIndex">
         <view class='reping row'>
           <view class='touxianghead'>
-            <image src='//wwc.alicdn.com/avatar/getAvatar.do?userIdStr=vFkSPFHuXH*evF8LPmHSXmvyXF9hvkcYXFIyOFk0PCZzPCMHMHZ-M88bXFg0v8kL&width=40&height=40&type=sns'></image>
+            <image src='https://wwc.alicdn.com/avatar/getAvatar.do?userIdStr=vFkSPFHuXH*evF8LPmHSXmvyXF9hvkcYXFIyOFk0PCZzPCMHMHZ-M88bXFg0v8kL&width=40&height=40&type=sns'></image>
             <text class='nick'>{{item.nick}}</text>
           </view>
           <view class='pinglunmain'>
@@ -67,7 +72,7 @@
           </view>
           <block wx:for="{{item.ratePicList}}">
             <view class='pinlunimages'>
-              <image data-src='{{rateIndex}}' src="{{'https:'+item}}" bindtap='onShowImage'></image>
+              <image data-src='{{rateIndex}}' src="{{item?'https:'+item:''}}" bindtap='onShowImage'></image>
             </view>
           </block>
           <view style='clear:both'></view>
@@ -80,11 +85,9 @@
     <view class='guigedivs'>
       <view class='xiangqingtitle'>产品参数</view>
       <block wx:for="{{props}}">
-        <view class="guigediv">
-          <text>{{item.name}}</text>：{{item.value}}
-        </view>
+        <view class="guigediv" wx:if="{{item.value.length<100}}">
+          <text>{{item.name}}</text>：{{item.value}}</view>
       </block>
-
     </view>
     <view class='xiangqingtitle'>图文详情</view>
     <view class='tuwen'>
@@ -100,6 +103,6 @@
         <text class='footyuanjia'>￥{{quanInfo.yuanjia}}</text>
       </view>
     </view>
-    <view class='foottklr' bindtap='onLingQuan' >立即领券</view>
+    <view class='foottklr' bindtap='onLingQuan'>立即领券</view>
   </view>
 </view>

@@ -19,11 +19,49 @@ Page({
     rateInfo: null,//淘宝数据
     baseUrl: Config.baseUrl,
     quanInfo: null,//优惠券面额信息
+    isLoading: true,
     props: {}, //商品属性
     loadImage: true,//没有加载商品详情描述图？
     showFootTKL: false,//显示底部领券？
+    afterGuarantees: null,//售后服务保证
+    isShowShare: false,
+    seller:null,
+    //动画定义
+    homeAnim: {},
+    zfAnim: {},
+    fxAnim: {},
+    ssAnim: {},
   },
 
+  //显示分享图标
+  onShowShare: function () {
+    this.setData({
+      isShowShare: !this.data.isShowShare
+    }, () => {
+      let homeAnim = this._createAnimation(-240);
+      let zfAnim = this._createAnimation(-180);
+      let fxAnim = this._createAnimation(-120);
+      let ssAnim = this._createAnimation(-60);
+      this.setData({
+        homeAnim: homeAnim,
+        zfAnim: zfAnim,
+        fxAnim: fxAnim,
+        ssAnim: ssAnim,
+      })
+    });
+
+  },
+
+  _createAnimation: function (y) {
+    let opacity = this.data.isShowShare ? 1 : 0;
+    let x = this.data.isShowShare ? 0 : 0;
+    let _y = this.data.isShowShare ? y : 0;
+    let anim = wx.createAnimation({
+      timingFunction: 'ease-out'
+    });
+    anim.opacity(opacity).translate(x, _y).step();
+    return anim.export();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -38,9 +76,18 @@ Page({
   },
 
   _init(ids) {
+    //查优惠券
     share.getQuanInfo(ids, (res) => {
+      if (!res || !res.activity) {
+        this.setData({
+          quanInfo: null,
+          isLoading: false
+        });
+        return;
+      }
       this.setData({
-        quanInfo: res
+        quanInfo: res,
+        isLoading: false
       })
     })
     //淘宝详情描述信息
@@ -49,29 +96,35 @@ Page({
       //添加主图
       pics['main'] = res.data.itemInfoModel.picsPath;
       //添加评论图
-      res.data.rateInfo.rateDetailList.forEach(function (value, index, arr) {
-        pics[index] = value.ratePicList;
-      });
-
+      if (res.data.rateInfo.rateDetailList) {
+        res.data.rateInfo.rateDetailList.forEach(function (value, index, arr) {
+          pics[index] = value.ratePicList;
+        });
+      }
+      //标签“正品保证，线上专柜。。。”需要从字符串转成对象
+      let guaranteeInfo = JSON.parse(res.data.apiStack[0].value);
+      let afterGuarantees = guaranteeInfo.data.guaranteeInfo.afterGuarantees;
       this.setData({
         rateInfo: res.data.rateInfo,
         title: res.data.itemInfoModel.title,
         pics: pics,
+        seller:res.data.seller,
+        afterGuarantees: afterGuarantees,
         props: res.data.props,
         isTmall: /tmall.com/.test(res.data.itemInfoModel.itemUrl) ? true : false,
         shopIcon: res.data.seller.picUrl,
         shopName: res.data.seller.shopTitle,
       })
-    })   
+    })
   },
-  onShowRates(event){
+  onShowRates(event) {
     wx.navigateTo({
-      url: '/pages/rate/rate?tbid='+this.data.tbid,
+      url: '/pages/rate/rate?tbid=' + this.data.tbid + '&userNumId=' + this.data.seller.userNumId,
     })
   },
   //点击立即领券
   onLingQuan(event) {
-    if(!this.data.quanInfo || !this.data.quanInfo.taoid){
+    if (!this.data.quanInfo || !this.data.quanInfo.taoid) {
       wx.showModal({
         title: '温馨提示',
         content: '该商品暂无优惠券，换个商品试试吧！',
@@ -84,29 +137,29 @@ Page({
     //设置服务器需要的参数
     let data = {
       tbid: this.data.quanInfo.taoid,
-      activity:this.data.quanInfo.activity,
-      logo:this.data.pics['main'][0],
-      title:this.data.title
+      activity: this.data.quanInfo.activity,
+      logo: this.data.pics['main'][0],
+      title: this.data.title
     };
     //调用API获取淘口令
     share.getTKL(data, (res) => {
       wx.hideLoading();
-      if(!res || !res.tkl){
+      if (!res || !res.tkl) {
         //服务器没有返回数据
         wx.showModal({
           title: '温馨提示',
           content: '该宝贝没有优惠券，请换个宝贝试试吧！'
         })
-      }else{
+      } else {
         //设置剪切板为淘口令并提示
         wx.setClipboardData({
           data: res.tkl,
-          success:function(){
+          success: function () {
             wx.showModal({
               title: '温馨提示',
               cancelText: '查看教程',
-              confirmColor:'#000',
-              cancelColor:'#3CC51F',
+              confirmColor: '#000',
+              cancelColor: '#3CC51F',
               confirmText: '知道了',
               content: res.gmtip,
               success: function (res) {
@@ -118,7 +171,7 @@ Page({
               }
             })
           },
-          fail:function(){
+          fail: function () {
             wx.showToast({
               title: '复制到剪切板失败，请重试！',
             })
@@ -146,7 +199,7 @@ Page({
     }
   },
   //显示底部领券
-  onShowFootTKL: function (event) {   
+  onShowFootTKL: function (event) {
     this.setData({
       showFootTKL: true
     })
@@ -182,7 +235,7 @@ Page({
       this.setData({
         pics: this.data.pics,
         loadImage: false
-      },function(){
+      }, function () {
         wx.hideLoading();
       })
     })

@@ -1,6 +1,28 @@
 <!--pages/baicai/list/index/index.wxml-->
 <view class='container'>
-  <scroll-view scroll-top="0" scroll-with-animation="true" scroll-y="true" style='position:absolute; top:0; left:0; right:0; bottom:0;'>
-    <listnav bindSwitch="onCateSwitch"/>
+  <scroll-view bindscrolltolower="onLoadMore" scroll-top="0" scroll-with-animation="true" scroll-y="true" style='position:absolute; top:0; left:0; right:0; bottom:0;'>
+    <listnav bindSwitch="onCateSwitch" />
+    <block wx:for="{{goods}}">
+      <view class='listshop'>
+        <navigator hover-class="none" url='/pages/share/share?x=bc&i={{item.tbid}}&t={{item.otitle}}&tg='>
+          <image src='{{item.imgurl}}'></image>
+          <view class='textlist'>
+            <view class='title'>
+              <text>包邮</text>{{item.otitle}}
+            </view>
+          </view>
+          <view class='quanfooter'>
+            <text class='goods_coupon'>
+              <text class='c_l clb'></text>
+              <text class='c_r clb'></text>
+              <text class='qunjine'>{{item.coupon_price}}</text>元券
+            </text>
+            <text class='quanhoujia'>券后：￥<text class='quanjias'>{{item.pprice}}</text></text>
+            <view style='clear: both'></view>
+          </view>
+        </navigator>
+      </view>
+    </block>
+    <loading visible="{{isLoading}}" />
   </scroll-view>
 </view>

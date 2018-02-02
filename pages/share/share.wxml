@@ -13,25 +13,35 @@
     <view class='new_div'>
       <view class='title'>
         <view class='itemTypeName'>{{isTmall?"天猫":"淘宝"}}</view>{{' ' + title}}</view>
-      <view class='biaoqian'></view>
-      <loading wx:if="{{!quanInfo}}" content="正在努力获取优惠券"/>
-        <block wx:else>
-          <view class='module1 row'>
-            <view class='jiage'>
-              <image mode='widthFix' src='/images/daoshoujia.png' style='width: 96rpx; height: 48rpx;'></image>￥
-              <text class='quans'>{{quanInfo.quanhou}}</text>
-              <text class='footyuanjia'>￥{{quanInfo.yuanjia}}</text>
-            </view>
-            <view class='xiaoliang'>
-              <text>{{quanInfo.xiaoliang}}人已买</text>
-            </view>
+      <view class='biaoqian'>
+        <block wx:for="{{afterGuarantees}}">
+          <icon color='orange' size='12' type='success'></icon>{{item.title}}
+        </block>
+      </view>
+      <loading wx:if="{{isLoading}}" content="正在努力获取优惠券" />
+      <block wx:else>
+        <view class='module1 row'>
+          <view class='jiage'>
+            <image mode='widthFix' src='/images/daoshoujia.png' style='width: 96rpx; height: 48rpx;'></image>￥
+            <text class='quans'>{{quanInfo.quanhou}}</text>
+            <text class='footyuanjia'>￥{{quanInfo.yuanjia}}</text>
           </view>
-          <view class='lingquan row' bindtap='onLingQuan'>
-            <image mode='widthFix' src="{{baseUrl+'images/coupon_quan_bg-bbd551c50b.png'}}"></image>
+          <view class='xiaoliang'>
+            <text>{{quanInfo.xiaoliang}}人已买</text>
+          </view>
+        </view>
+        <view class='lingquan row' bindtap='onLingQuan'>
+          <image mode='widthFix' src="{{baseUrl+'images/coupon_quan_bg-bbd551c50b.png'}}"></image>
+          <block wx:if="{{quanInfo==null}}">
+            <text class='quane'><text class='quanet'>亲来晚啦！</text></text>
+            <text class="lingquantext">券被抢光</text>
+          </block>
+          <block wx:else>
             <text class='quane'>{{quanInfo.quan}}<text class='quanet'>元优惠券</text></text>
             <text class="lingquantext">立即领券</text>
-          </view>
-        </block>
+          </block>
+        </view>
+      </block>
     </view>
     <view class='jieshao row'>
       <text>推荐</text>
@@ -96,7 +106,7 @@
       </block>
     </view>
   </view>
-  <view class='foottkl' wx:if="{{showFootTKL}}">
+  <view class='foottkl' wx:if="{{quanInfo&&showFootTKL}}">
     <view class='foottkll'>
       <view class='foottklls'>券后
         <text class='footquanhou'>￥{{quanInfo.quanhou}}</text>
@@ -105,4 +115,25 @@
     </view>
     <view class='foottklr' bindtap='onLingQuan'>立即领券</view>
   </view>
+  <view class='modal' wx:if="{{isShowShare}}"></view>
+  <view class='img-style' animation="{{homeAnim}}">
+    <text>首页</text>
+    <image src='/images/home.png'></image>
+  </view>
+  <button class="img-style toolbutton"  animation="{{zfAnim}}">
+    <text>转发</text>
+    <image src='/images/zhuanfa.png'></image>
+  </button>
+  <view class='img-style'  animation="{{fxAnim}}">
+    <text>分享</text>
+    <image src='/images/fenxtu.png'></image>
+  </view>
+  <view class='img-style'  animation="{{ssAnim}}">
+    <text>搜索</text>
+    <image src='/images/sousuo.png'></image>
+  </view>
+  <view class='img-style'>
+    <image class='/images/zuji.png'></image>
+  </view>
+  <image class='img-plus-style' bindtap='onShowShare' src="{{isShowShare?'/images/cds-ad6251507c.png':'/images/cd-ad6251507c.png'}}"></image>
 </view>

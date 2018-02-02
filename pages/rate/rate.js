@@ -24,6 +24,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       tbid: options.tbid,
+      userNumId:options.userNumId,
       isLoading:true,
     })
     this._init();
@@ -32,6 +33,7 @@ Page({
   _init() {
     let data = {
       tbid: this.data.tbid,
+      user_num_id:this.data.userNumId,
       page: 1
     }
     this._getRate(data);

@@ -14,7 +14,7 @@ Component({
     },
     curCid: {
       type: Number,
-      value: 0
+      value: 2
     }
   },
   /**
@@ -30,7 +30,7 @@ Component({
       this.setData({
         curCid: this.data.category[index].cid
       })
-      this.triggerEvent('Switch', this.data.category[index]) // 只会触发 pageEventListener2
+      this.triggerEvent('Switch', {cid:this.data.category[index].cid});//触发TAB更换事件
     }
   },
 
@@ -38,8 +38,10 @@ Component({
     listNav.get((res) => {
       this.setData({
         category: res.category,
-        curCid:res.curCid
+        curCid:res.curCid       
+      },()=>{
+        this.triggerEvent('Switch', {cid:this.data.curCid});//触发TAB更换事件
       })
-    })
+    });    
   },  
 })

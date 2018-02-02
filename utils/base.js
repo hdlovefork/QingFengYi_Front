@@ -16,6 +16,7 @@ class Base {
       params.type = 'GET';
     }
 
+    let appid=wx.getExtConfigSync().appid;
     wx.request({
       url: url,
       data: params.data,
@@ -24,7 +25,7 @@ class Base {
         'Content-Type': 'application/json',
         'Token': wx.getStorageSync('token'),
         'Cookie': 'XDEBUG_SESSION=PHPSTORM',
-        'X-Api-Key': 'e101831fa8c8f819a3f1a4d2d7100e2b'
+        'X-Api-Key': appid
       },
       success: function (res) {
         // if(params.sCallBack){
@@ -52,7 +53,7 @@ class Base {
             }
           }          
           if (noRefetch) {
-            params.eCallback && params.eCallback(res.data);
+            params.sCallback && params.sCallback(res.data);
           }          
         }
       },

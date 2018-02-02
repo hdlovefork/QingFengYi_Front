@@ -1,5 +1,8 @@
 {
+  "navigationBarBackgroundColor": "#FF2220",
+  "navigationBarTextStyle": "white",
     "usingComponents": {
-      "listnav":"/components/listnav/listnav"
+      "listnav":"/components/listnav/listnav",
+      "loading": "/components/loading/loading"
     }
 }

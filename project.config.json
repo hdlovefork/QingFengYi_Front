@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -31,7 +31,7 @@
 					"id": 0,
 					"name": "share",
 					"pathName": "pages/share/share",
-					"query": "x=dtk&u=1&i=540267461790"
+					"query": "x=dtk&u=1&ti=5428294"
 				},
 				{
 					"id": 1,
@@ -73,6 +73,18 @@
 					"id": -1,
 					"name": "baicai-list-index",
 					"pathName": "pages/baicai/list/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "topic",
+					"pathName": "pages/topic/topic",
+					"query": "id=qinglv"
+				},
+				{
+					"id": -1,
+					"name": "search",
+					"pathName": "pages/search/search",
 					"query": ""
 				}
 			]

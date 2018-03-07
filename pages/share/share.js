@@ -25,7 +25,7 @@ Page({
     showFootTKL: false,//显示底部领券？
     afterGuarantees: null,//售后服务保证
     isShowShare: false,
-    seller:null,
+    seller: null,
     //动画定义
     homeAnim: {},
     zfAnim: {},
@@ -88,10 +88,20 @@ Page({
       this.setData({
         quanInfo: res,
         isLoading: false
-      })
+      });
+      if (!ids.tbid) {
+        this.data.tbid = res.taoid;
+        this._getDetail(this.data.tbid);
+      }
     })
+    if (ids.tbid) {
+      this._getDetail(ids.tbid);
+    }
+  },
+
+  _getDetail(tbid) {
     //淘宝详情描述信息
-    share.getDetail(ids, (res) => {
+    share.getDetail(tbid, (res) => {
       let pics = {}
       //添加主图
       pics['main'] = res.data.itemInfoModel.picsPath;
@@ -108,7 +118,7 @@ Page({
         rateInfo: res.data.rateInfo,
         title: res.data.itemInfoModel.title,
         pics: pics,
-        seller:res.data.seller,
+        seller: res.data.seller,
         afterGuarantees: afterGuarantees,
         props: res.data.props,
         isTmall: /tmall.com/.test(res.data.itemInfoModel.itemUrl) ? true : false,
@@ -117,6 +127,7 @@ Page({
       })
     })
   },
+
   onShowRates(event) {
     wx.navigateTo({
       url: '/pages/rate/rate?tbid=' + this.data.tbid + '&userNumId=' + this.data.seller.userNumId,

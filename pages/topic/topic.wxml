@@ -1,2 +1,22 @@
 <!--pages/topic/topic.wxml-->
-<text>pages/topic/topic.wxml</text>
+<view>
+<block wx:for="{{topic.coupon_list}}">
+  <view class='listshop'>
+    <navigator url='/pages/share/share?x=sqkb&&i={{item.item_id}}'>
+      <image src='{{item.thumbnail_pic}}'></image>
+      <view class='textlist'>
+        <view class='title'><text>包邮</text>{{item.title}}</view>        
+      </view>
+      <view class='quanfooter'>
+        <text class='goods_coupon'>
+          <text class='c_l clb'></text>
+          <text class='c_r clb'></text>
+          <text class='qunjine'>{{item.raw_price-item.zk_price|Int}}</text>元券
+        </text>
+        <text class='quanhoujia'>券后价:￥<text class='quanjias'>{{item.zk_price}}</text></text>
+        <view style='clear: both'></view>
+      </view>
+    </navigator>
+  </view>
+</block>
+</view>

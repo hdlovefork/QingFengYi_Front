@@ -11,7 +11,9 @@
     "pages/category/category",
     "pages/baicai/list/index/index",
     "pages/api/qingtaoke/list",
-    "pages/baicai/search/search"
+    "pages/baicai/search/search",
+    "pages/search/search",
+    "pages/dataoke/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",

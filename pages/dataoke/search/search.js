@@ -1,38 +1,20 @@
-// pages/topic/topic.js
-import {Topic} from 'topic-model.js';
-var topic = new Topic();
-
+// pages/dataoke/search/search.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    keyword:'',
-    tg:'',
-    topic:{}
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.keyword=options.id;
-    this.data.tg=options.tg;
-    this._init();
+  
   },
 
-  _init:function(){
-    topic.getTopic(this.data.keyword,(res)=>{
-      //设置导航标题
-      wx.setNavigationBarTitle({
-        title: res.data.title + '专题',
-      }) 
-      this.setData({
-        topic:res.data
-      });
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

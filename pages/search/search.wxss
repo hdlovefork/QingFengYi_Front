@@ -1,0 +1,39 @@
+/* pages/search/search.wxss */
+page{ background: #fff !important; font-family: '微软雅黑'; font-size: 28rpx; }
+.sousuokuang{ width: 100% !important; display:block; padding: 8rpx 0; }
+.shuaxin{ float: right; }
+.tops{ padding: 0 20rpx; margin-top: 20rpx; }
+.cjsss{ padding: 12rpx ; margin-top: 8rpx; }
+.sousuokuang input{ text-align: center; height: 52rpx; float: left; font-size: 24rpx; color: #444; width: 78%; background: #F5F4F4; margin: 8rpx 16rpx; border-radius: 8rpx; border: 2rpx solid #F5F4F4; }
+.sousuobtn{ width: 14%; float: right; margin-right: 12rpx; font-size: 22rpx; vertical-align:bottom; color: #fff; margin-top: 8rpx; border: none; border-radius: 8rpx; background: linear-gradient(to right,#ff7438,#ff1f1f); }
+.sousuobtn::after{ border:none; }
+.oldso{ color: #DADADA; font-size: 24rpx; }
+.sousuokuang{ border-bottom: 2rpx solid #eee; }
+.widget-goTop { position: fixed; bottom: 170rpx; right: 10rpx; overflow: hidden; z-index: 500; }
+.widget-goTop .gotop-wrap { display:-webkit-flex; display:flex; -webkit-flex-direction:column; flex-direction:column; -webkit-align-items:center; align-items:center; -webkit-justify-content:center; justify-content:center; }
+.sousuodiv{ padding: 0 20rpx; margin-top: 20rpx; }
+.guanjianci{ padding: 12rpx 20rpx; border-radius: 16rpx; color: #444; float: left; font-size: 22rpx; margin: 8rpx; border: 2rpx solid #eee; }
+.title{ color: #444; margin: 0 8rpx; padding-bottom: 8rpx; }
+.lishisou{ padding: 0 20rpx; margin-top: 20rpx; }
+.qingk{ float: right; font-size: 22rpx; color: #444; }
+@media screen and (max-width: 640rpx) { .sousuokuang input{ width: 75%; }
+.sousuobtn{ width: 16%; }
+}page{ -webkit-animation: 1s opacity2; animation: 1s opacity2; font-size: 28rpx; font-family: "微软雅黑"; }
+@-webkit-keyframes opacity2{ 0%{opacity:0}
+100%{opacity:1;}
+}@keyframes opacity2{ 0%{opacity:0}
+100%{opacity:1;}
+}.tophead{ width: 100%; background: #FE312A; }
+.section{ padding: 20rpx; }
+.searchicon{ background: #fff; position:absolute; top:36rpx; left:40rpx; z-index:999 }
+.section input{ color: #555; padding-left:66rpx; height:60rpx; line-height:60rpx; width: 72%; float: left; border-radius: 8rpx; background: #fff; }
+.placeclass{ padding-left: 0rpx; font-size: 24rpx; }
+.section button,.section button::after{ height:60rpx; line-height:60rpx; margin-left:20rpx; font-size: 28rpx; width: 16%; float: left; color: #FE312A; background: #fff; border: none; content:none; }
+.fenpai{ width: 100%; }
+.fenpai view{ font-size: 30rpx; float: left; height: 80rpx; line-height: 80rpx; text-align: center; width: 50%; border-bottom:2rpx solid #eee; }
+.ha text{ display: inline-block; height: 80rpx; line-height: 80rpx; border-bottom: 4rpx solid #FE312A; }
+.main{ padding: 20rpx 40rpx; }
+@media screen and (max-width: 750rpx) { .section input{ width: 70%; }
+}@media screen and (max-width: 640rpx) { .section input{ width: 65%; }
+.section button,.section button::after{ width: 20%; }
+}
